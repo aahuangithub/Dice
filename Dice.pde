@@ -1,51 +1,55 @@
 Die firstDie;
 int sum;
-void setup()
-{
+void setup(){
 	size(800, 800);
-	
+	noLoop();
 }
-void draw()
-{
+void draw(){
 	//
 	background(0);
 	for (int i=0; i< 4; i++){
-		firstDie=new Die(i*200+50, i*200+50);
+		firstDie=new Die(Math.random(), Math.random());
 		firstDie.display();
 		sum+=firstDie.value;
 	}
 	fill(256);
 	text(sum, 20, 20);
 }
-void mouseClicked()
-{
-	firstDie.roll();
+void mouseClicked(){
+	redraw();
 }
 class Die
 {
-	int value, xPos, yPos;
-	Die(int x, int y) 
-	{
-		xPos=x;
-		yPos=y;
+	int value, x, y;
+	Die(int x, int y){
+		this.x=x;
+		this.y=y;
 		roll();
 	}
-	void roll()
-	{
+	void roll(){
 		int rand=(int)(Math.random()*10+1);
 		while (!(rand<=6)){
 			rand=(int)(Math.random()*10+1);
 		}
-		value=rand;
-		println(value);
+		this.value=rand;
 	}
-	void display()
-	{
-		
-		fill(256, 256, 256);
-		ellipse(xPos, yPos, 100, 100);
-		fill(0);
+	void display(){
+		fill(256,256, 256);
 		textAlign(CENTER);
-		text(value, xPos, yPos);
+		text(this.value, this.x, this.y);
+		switch(this.value){
+			case 1 : rect(this.x, this.y, 50, 50, 10);
+			break;
+			case 2 : ellipse(20, 20, 20, 20);
+			break;
+			case 3 : ellipse(50, 50, 50, 50);
+			break;
+			case 4 : ellipse(100, 100, 100, 100);
+			break;
+			case 5 : rect(20, 20, 20, 20);
+			break;
+			case 6 : rect(1, 1, 22, 22);
+			break;
+		}
 	}
 }
