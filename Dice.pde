@@ -1,29 +1,34 @@
 Die firstDie;
 int sum;
 void setup(){
-	size(800, 800);
+	size(800, 800, P3D);
 	noLoop();
+	lights();
+
 }
 void draw(){
 	//
+	rotate(PI/20);
 	background(0);
 	for (int i=0; i< 4; i++){
-		firstDie=new Die(Math.random(), Math.random());
+		firstDie=new Die((int)(Math.random()*(width-200)+100), (int)(Math.random()*(height-200)+100));
 		firstDie.display();
 		sum+=firstDie.value;
 	}
 	fill(256);
 	text(sum, 20, 20);
 }
-void mouseClicked(){
+void mouseWheel(){
 	redraw();
+
 }
 class Die
 {
-	int value, x, y;
+	int value, x, y, rot;
 	Die(int x, int y){
 		this.x=x;
 		this.y=y;
+		this.rot=(int)(Math.random()*360);
 		roll();
 	}
 	void roll(){
@@ -37,18 +42,27 @@ class Die
 		fill(256,256, 256);
 		textAlign(CENTER);
 		text(this.value, this.x, this.y);
+		pushMatrix();
+			translate(this.x, this.y);
+			rotate(radians(this.rot));
+			rect(0, 0, 100, 100, 10);
+		popMatrix();
 		switch(this.value){
-			case 1 : rect(this.x, this.y, 50, 50, 10);
+			case 1 : 
 			break;
-			case 2 : ellipse(20, 20, 20, 20);
+			case 2 : 
+					
 			break;
-			case 3 : ellipse(50, 50, 50, 50);
+			case 3 : 
+					
 			break;
-			case 4 : ellipse(100, 100, 100, 100);
+			case 4 : 
+					
 			break;
-			case 5 : rect(20, 20, 20, 20);
+			case 5 : 
+					
 			break;
-			case 6 : rect(1, 1, 22, 22);
+			case 6 : 
 			break;
 		}
 	}
