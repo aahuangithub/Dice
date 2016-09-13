@@ -1,28 +1,51 @@
 Die firstDie;
-int sum;
+int[] sums=new int[10];
 void setup(){
-	size(800, 800, P3D);
+	size(800, 800);
 	noLoop();
 
 }
 void draw(){
-	//
-	rotate(PI/20);
 	background(150, 200, 256);
-	for (int i=0; i< 4; i++){
-		firstDie=new Die((int)(Math.random()*(width-400)+200), (int)(Math.random()*(height-400)+200));
+
+	//
+	int sum = 0;
+	strokeWeight(1);
+	stroke(0);
+	for (int i=0; i< 6; i++){
+		firstDie=new Die((int)(Math.random()*(width-200)+100), (int)(Math.random()*(height-200)+100));
 		firstDie.display();
 		sum+=firstDie.value;
 	}
-	fill(256);
-	ellipseMode(CENTER);
-	ellipse(400, 400, 50, 50);
+	for (int i=0; i<sums.length; i++){
+		if (sums[i]==0){
+			sums[i]=sum;
+			break;
+		}
+	}
+	for (int i=0; i<sums.length; i++){
+		if (i==0){
+			line(0,0,i*80,sums[i]*(400/36));
+		}
+		else{
+			line(i*80,sums[i]*(400/36),i*80-80, sums[i-1]*(400/36));
+		}
+	}
+	
+	//clears screen if graph reaches 10
+	if (sums[9]!=0){
+		for (int i=0; i<sums.length; i++){
+			sums[i]=0;
+		}
+	}
 }
 void mouseWheel(){
 	redraw();
-
 }
-void mousePressed(){
+void mouseDragged(){
+	redraw();
+}
+void mouseClicked(){
 	redraw();
 }
 class Die
@@ -83,8 +106,8 @@ class Die
 				ellipse(25, 25, 20, 20); 
 				ellipse(-25, 25, 20, 20); 
 				ellipse(25, -25, 20, 20); 
-				ellipse(0, 25, 20, 20); //center dot
-				ellipse(0, -25, 20, 20); //center dot
+				ellipse(0, 25, 20, 20);
+				ellipse(0, -25, 20, 20);
 			break;
 		}
 		popMatrix();		
