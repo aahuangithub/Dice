@@ -1,5 +1,6 @@
 Die firstDie;
-int[] sums=new int[10];
+int sum = 0;
+boolean stopped = true;
 void setup(){
 	size(800, 800);
 	noLoop();
@@ -7,46 +8,33 @@ void setup(){
 }
 void draw(){
 	background(150, 200, 256);
-
+	sum=0;
 	//
-	int sum = 0;
 	strokeWeight(1);
 	stroke(0);
-	for (int i=0; i< 6; i++){
-		firstDie=new Die((int)(Math.random()*(width-200)+100), (int)(Math.random()*(height-200)+100));
-		firstDie.display();
-		sum+=firstDie.value;
-	}
-	for (int i=0; i<sums.length; i++){
-		if (sums[i]==0){
-			sums[i]=sum;
-			break;
+	for (int xPos=100; xPos<width; xPos+=200){
+		for (int yPos=100; yPos<height; yPos+=200){
+			firstDie=new Die (xPos, yPos);
+			firstDie.display();
+			sum+=firstDie.value;
 		}
 	}
-	for (int i=0; i<sums.length; i++){
-		if (i==0){
-			line(0,0,i*80,sums[i]*(400/36));
-		}
-		else{
-			line(i*80,sums[i]*(400/36),i*80-80, sums[i-1]*(400/36));
-		}
-	}
+
+	text(sum, height/2, width/2);
+
+
 	
-	//clears screen if graph reaches 10
-	if (sums[9]!=0){
-		for (int i=0; i<sums.length; i++){
-			sums[i]=0;
-		}
-	}
 }
-void mouseWheel(){
-	redraw();
-}
-void mouseDragged(){
-	redraw();
-}
+
 void mouseClicked(){
-	redraw();
+	if (!stopped){
+		noLoop();
+		stopped=!stopped;
+	}
+	else{
+		loop();
+		stopped=!stopped;
+	}
 }
 class Die
 {
@@ -55,7 +43,9 @@ class Die
 		this.x=x;
 		this.y=y;
 		this.rot=(int)(Math.random()*360);
-		roll();
+		roll();	
+
+		
 	}
 	void roll(){
 		int rand=(int)(Math.random()*10+1);
@@ -70,7 +60,7 @@ class Die
 		rectMode(CENTER);
 		text(this.value, this.x, this.y);
 		pushMatrix();
-			translate(this.x, this.y);
+			translate(this.x+(int)(Math.random()*100)-50, this.y+(int)(Math.random()*100)-50);
 			rotate(radians(this.rot));
 			rect(0, 0, 100, 100, 10);
 
