@@ -20,12 +20,12 @@ void draw(){
 		}
 	}
 	if (firstRun){
-		fill (0, 256, 0);
+		fill (0, 0, 0, 150);
+		rect (width/2, height/2, width, height);
+		fill(256);
+		//triangle(width/2-25, y1, width/2-25, y2, x3, y3);
+		firstRun=false;
 	}
-	if (!stopped){
-		fill(256, 0, 0);
-	}
-	ellipse (height/2, width/2, 50, 50);
 	text(sum, height/2, width/2);
 }
 
@@ -35,8 +35,8 @@ void mouseClicked(){
 		stopped=!stopped;
 	}
 	else{
-		fill (0, 256, 0);
-		ellipse (height/2, width/2, 50, 50);
+		fill (0, 0, 0, 150);
+		rect (width/2, height/2, width, height);
 		noLoop();
 		stopped=!stopped;
 	}
