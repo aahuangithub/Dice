@@ -1,10 +1,10 @@
 Die firstDie;
 int sum = 0;
+boolean firstRun = true;
 boolean stopped = true;
 void setup(){
 	size(800, 800);
 	noLoop();
-
 }
 void draw(){
 	background(150, 200, 256);
@@ -19,20 +19,25 @@ void draw(){
 			sum+=firstDie.value;
 		}
 	}
-
+	if (firstRun){
+		fill (0, 256, 0);
+	}
+	if (!stopped){
+		fill(256, 0, 0);
+	}
+	ellipse (height/2, width/2, 50, 50);
 	text(sum, height/2, width/2);
-
-
-	
 }
 
 void mouseClicked(){
-	if (!stopped){
-		noLoop();
+	if (stopped){
+		loop();
 		stopped=!stopped;
 	}
 	else{
-		loop();
+		fill (0, 256, 0);
+		ellipse (height/2, width/2, 50, 50);
+		noLoop();
 		stopped=!stopped;
 	}
 }
