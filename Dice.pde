@@ -2,6 +2,7 @@ Die firstDie;
 int sum = 0;
 boolean firstRun = true;
 boolean stopped = true;
+PFont f1, f2;
 void onStop(){
 	noStroke();
 	fill (0, 0, 0, 200);
@@ -13,12 +14,17 @@ void onStop(){
 	if (!firstRun){
 		text(sum, width/2, height/3);
 		text("YOUR SCORE:", width/2, height/3-122);
+		textFont(f2, 15);
+		text("(out of 72)", width/2, height/3+25);
+		textFont(f1, 66);
 		text("YOU ARE IN THE TOP\n"+round((float)sum*0.72)+"\nPERCENT", width/2, 2*height/3);
 	}
 }
 void setup(){
 	size(800, 800);
 	noLoop();
+	f1 = createFont("Arial",66);
+	f2 = createFont("Arial Italic",66);
 }
 void draw(){
 	background(150, 200, 256);
