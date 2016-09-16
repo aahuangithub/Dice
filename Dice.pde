@@ -10,9 +10,11 @@ void onStop(){
 	triangle(width/2-25, height/2-35.35, width/2-25, height/2+35.35, width/2+25, height/2);
 	fill(233, 256, 233);
 	textSize(66);
-	text(sum, width/2, height/3);
-	text("YOUR SCORE:", width/2, height/3-122);
-	text("YOU ARE IN THE TOP\n"+round((float)sum*0.72)+"\nPERCENT", width/2, 2*height/3);
+	if (!firstRun){
+		text(sum, width/2, height/3);
+		text("YOUR SCORE:", width/2, height/3-122);
+		text("YOU ARE IN THE TOP\n"+round((float)sum*0.72)+"\nPERCENT", width/2, 2*height/3);
+	}
 }
 void setup(){
 	size(800, 800);
