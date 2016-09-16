@@ -2,6 +2,18 @@ Die firstDie;
 int sum = 0;
 boolean firstRun = true;
 boolean stopped = true;
+void onStop(){
+	noStroke();
+	fill (0, 0, 0, 200);
+	rect (width/2, height/2, width, height);
+	fill(0, 256, 0);
+	triangle(width/2-25, height/2-35.35, width/2-25, height/2+35.35, width/2+25, height/2);
+	fill(233, 256, 233);
+	textSize(66);
+	text(sum, width/2, height/3);
+	text("YOUR SCORE:", width/2, height/3-122);
+	text("YOU ARE IN THE TOP\n"+round((float)sum*0.72)+"\nPERCENT", width/2, 2*height/3);
+}
 void setup(){
 	size(800, 800);
 	noLoop();
@@ -20,13 +32,9 @@ void draw(){
 		}
 	}
 	if (firstRun){
-		fill (0, 0, 0, 150);
-		rect (width/2, height/2, width, height);
-		fill(256);
-		//triangle(width/2-25, y1, width/2-25, y2, x3, y3);
+		onStop();
 		firstRun=false;
 	}
-	text(sum, height/2, width/2);
 }
 
 void mouseClicked(){
@@ -35,8 +43,7 @@ void mouseClicked(){
 		stopped=!stopped;
 	}
 	else{
-		fill (0, 0, 0, 150);
-		rect (width/2, height/2, width, height);
+		onStop();
 		noLoop();
 		stopped=!stopped;
 	}
